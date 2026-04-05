@@ -8,7 +8,9 @@
 prime-factorizer/
 ├── src/                    # 開発用ソースコード
 │   ├── main.jsx            # Reactのエントリポイント
-│   ├── App.jsx             # 状態管理・ロジック制御
+│   ├── App.jsx             # 画面全体のレイアウト・司令塔
+│   ├── hooks/              # ロジック抽出（カスタムフック）
+│   │   └── useFactorization.js
 │   ├── components/         # UIパーツ（コンポーネント）
 │   │   ├── NumberInput.jsx
 │   │   ├── CalculatingStatus.jsx
