@@ -1,4 +1,5 @@
-// miller-rabin.js - ミラーラビン素数判定法
+// src/algorithms/miller-rabin.js
+// ミラーラビン素数判定法
 
 // ミラーラビン素数判定法
 export function isPrimeMillerRabin(n) {

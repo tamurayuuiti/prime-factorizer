@@ -1,4 +1,5 @@
-// pollards-rho.js - Pollard's Rho 法による因数分解アルゴリズム
+// src/algorithms/pollards-rho.js
+//s Pollard's Rho 法による因数分解アルゴリズム
 
 import { isPrimeMillerRabin } from "./miller-rabin.js"; // ミラーラビン素数判定法
 

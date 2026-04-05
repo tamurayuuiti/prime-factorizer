@@ -1,4 +1,5 @@
-// trial-division.js - 試し割り法による因数分解アルゴリズム
+// src/algorithms/trial-division.js
+// 試し割り法による因数分解アルゴリズム
 
 let primesCache = null;
 

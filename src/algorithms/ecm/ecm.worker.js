@@ -1,4 +1,5 @@
-// ecm.worker.js - ECM 法ワーカー
+// src/algorithms/ecm/ecm.worker.js
+// ECM 法ワーカー
 
 // 定数
 const ZERO = 0n;
