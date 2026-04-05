@@ -8,22 +8,31 @@
 prime-factorizer/
 ├── src/                    # 開発用ソースコード
 │   ├── main.jsx            # Reactのエントリポイント
-│   ├── App.jsx             # UI・状態管理・計算フローの統合
-│   ├── algorithms/         # 計算ロジックの実装（JS）
+│   ├── App.jsx             # 状態管理・ロジック制御
+│   ├── components/         # UIパーツ（コンポーネント）
+│   │   ├── NumberInput.jsx
+│   │   ├── CalculatingStatus.jsx
+│   │   ├── ResultDisplay.jsx
+│   │   └── ErrorMessage.jsx
+│   ├── algorithms/         # 純粋な計算ロジック（JS）
 │   │   ├── trial-division.js
 │   │   ├── miller-rabin.js
 │   │   ├── pollards-rho.js
-│   │   └── ecm.js
-│   ├── workers/            # バックグラウンド処理
-│   │   └── ecm.worker.js   # ECM法のWebWorker
-│   └── index.css           # Tailwind v4 設定 / グローバルスタイル
-├── public/                 # 静的リソース（ビルドを通さないファイル）
+│   │   └── ecm/
+│   │       ├── ecm.js      # ECMメインロジック
+│   │       └── ecm.worker.js # WebWorker実装
+│   └── index.css           # Tailwind v4 設定
+├── public/                 # 静的リソース
 │   └── data/
 │       └── primes.txt      # 試し割り用素数リスト
-├── index.html              # ViteのHTMLテンプレート
-├── vite.config.js          # Viteの設定
-├── package.json            # 依存関係・スクリプト定義
-└── README.md               # プロジェクト概要・起動手順
+├── docs/                   # ビルド成果物（GitHub Pages用）
+│   ├── index.html
+│   ├── assets/
+│   └── data/
+├── index.html
+├── vite.config.js
+├── package.json
+└── README.md
 ````
 
 ---

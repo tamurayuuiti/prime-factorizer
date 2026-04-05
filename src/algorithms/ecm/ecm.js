@@ -1,6 +1,6 @@
 // ecm.js - ECM 法による因数分解アルゴリズム
 
-import { isPrimeMillerRabin } from "./miller-rabin.js"; // ミラーラビン素数判定法
+import { isPrimeMillerRabin } from "../miller-rabin.js"; // ミラーラビン素数判定法
 
 // ECM用の戦略リスト
 function getStrategies() {
@@ -142,7 +142,10 @@ export async function ecmOneNumber(n, options = {}) {
     for (let i = 0; i < workerCount; i++) {
       let worker;
       try {
-        worker = new Worker("./src/workers/ecm.worker.js");
+        worker = new Worker(
+          new URL('./algorithms/ecm/ecm.worker.js', import.meta.url),
+          { type: 'module' }
+        );
         workers.push(worker);
         activeWorkers++;
       } catch (err) {
