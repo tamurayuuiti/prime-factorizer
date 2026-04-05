@@ -12,8 +12,7 @@ prime-factorizer/
 │   ├── components/         # UIパーツ（コンポーネント）
 │   │   ├── NumberInput.jsx
 │   │   ├── CalculatingStatus.jsx
-│   │   ├── ResultDisplay.jsx
-│   │   └── ErrorMessage.jsx
+│   │   └── ResultDisplay.jsx
 │   ├── algorithms/         # 純粋な計算ロジック（JS）
 │   │   ├── trial-division.js
 │   │   ├── miller-rabin.js
