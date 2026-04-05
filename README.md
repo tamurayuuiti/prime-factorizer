@@ -2,15 +2,31 @@
 
 ブラウザ上で動作する素因数分解ツールです。試し割り、ミラー・ラビン、Pollard's Rho、ECM法を組み合わせ、大きな整数の因数分解を行います。
 
-## 主なファイル
-- [index.html](index.html) — Web UI のエントリポイント
-- [src/main.js](src/main.js) — UI制御・入力検証・進捗／結果表示
-- [src/algorithms/trial-division.js](src/algorithms/trial-division.js) — 試し割り処理（`loadPrimes` / `trialDivision`）
-- [src/algorithms/miller-rabin.js](src/algorithms/miller-rabin.js) — ミラー・ラビン素数判定（`isPrimeMillerRabin` / `powerMod`）
-- [src/algorithms/pollards-rho.js](src/algorithms/pollards-rho.js) — Pollard's Rho法（`pollardsRhoFactorization`）
-- [src/algorithms/ecm.js](src/algorithms/ecm.js) — ECM法（`ecmFactorization` / `ecmOneNumber`）
-- [src/workers/ecm.worker.js](src/workers/ecm.worker.js) — ECM法のWebWorker実装
-- [src/data/primes.txt](src/data/primes.txt) — 試し割り用素数リスト
+## ディレクトリ構成
+
+```text
+prime-factorizer/
+├── src/                    # 開発用ソースコード
+│   ├── main.jsx            # Reactのエントリポイント
+│   ├── App.jsx             # UI・状態管理・計算フローの統合
+│   ├── algorithms/         # 計算ロジックの実装（JS）
+│   │   ├── trial-division.js
+│   │   ├── miller-rabin.js
+│   │   ├── pollards-rho.js
+│   │   └── ecm.js
+│   ├── workers/            # バックグラウンド処理
+│   │   └── ecm.worker.js   # ECM法のWebWorker
+│   └── index.css           # Tailwind v4 設定 / グローバルスタイル
+├── public/                 # 静的リソース（ビルドを通さないファイル）
+│   └── data/
+│       └── primes.txt      # 試し割り用素数リスト
+├── index.html              # ViteのHTMLテンプレート
+├── vite.config.js          # Viteの設定
+├── package.json            # 依存関係・スクリプト定義
+└── README.md               # プロジェクト概要・起動手順
+````
+
+---
 
 ## 主要な挙動
 

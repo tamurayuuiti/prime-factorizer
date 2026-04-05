@@ -12,7 +12,7 @@ export async function loadPrimes(progressCallback = null) {
     try {
         progressCallback?.({ status: "start" });
 
-        const response = await fetch("./src/data/primes.txt");
+        const response = await fetch("/data/primes.txt");
         if (!response.ok) {
             throw new Error(`HTTPステータス ${response.status}`);
         }
