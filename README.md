@@ -1,16 +1,18 @@
 # 素因数分解計算機
 
-ブラウザ上で動作する素因数分解ツールです。  
-試し割り法・ミラーラビン・Pollard's Rho・ECM法を組み合わせ、大きな整数の因数分解を行います。
+React + Vite による素因数分解アプリケーションです。
+
+試し割り法・ミラーラビン素数判定・Pollard's Rho 法・ECM 法を組み合わせ、大きな整数の素因数分解をブラウザ上で実行します。
 
 ---
 
-## 概要
+## 技術スタック
 
-* **フロントエンド**: React + Vite
-* **スタイル**: Tailwind CSS v4
-* **計算**: BigInt + WebWorker（並列処理）
-* **公開**: GitHub Pages（`docs/` を使用）
+* React
+* Vite
+* Tailwind CSS
+* BigInt
+* Web Worker
 
 ---
 
@@ -18,81 +20,92 @@
 
 ```text
 prime-factorizer/
-├── src/                    # 開発用ソースコード
-│   ├── main.jsx            # Reactのエントリポイント
-│   ├── App.jsx             # 画面全体のレイアウト・司令塔
-│   ├── hooks/              # ロジック（カスタムフック）
-│   │   └── useFactorization.js # 素因数分解の制御ロジック
-│   ├── components/         # UIコンポーネント
-│   │   ├── NumberInput.jsx
-│   │   ├── CalculatingStatus.jsx
-│   │   └── ResultDisplay.jsx
-│   ├── algorithms/         # 素因数分解アルゴリズム
-│   │   ├── trial-division.js # 試し割り法
-│   │   ├── miller-rabin.js  # 素数判定（ミラーラビン）
-│   │   ├── pollards-rho.js  # Pollard's Rho法
-│   │   └── ecm/
-│   │       ├── ecm.js       # ECM本体
-│   │       └── ecm.worker.js # 並列処理Worker
-│   └── index.css           # Tailwind設定
-├── public/                 # 静的リソース
-│   └── data/
-│       └── primes.txt      # 試し割り用素数リスト
-├── docs/                   # ビルド成果物（GitHub Pages用）
-│   ├── index.html          # 公開用エントリポイント
-│   ├── assets/             # ビルド済みJS/CSS
-│   └── data/               # 公開用データ
-├── index.html              # 開発用エントリHTML
-├── vite.config.js          # Vite設定
-├── package.json            # 依存関係・スクリプト設定
+├── public/
+│   └── data/          # 素数データ
+│
+├── src/
+│   ├── algorithms/    # 素因数分解アルゴリズム
+│   ├── components/    # UIコンポーネント
+│   ├── hooks/         # カスタムフック
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+├── vite.config.js
 └── README.md
-````
+```
 
 ---
 
-## 動作フロー
+## セットアップ
 
-1. primes.txt を読み込み（試し割り用）
-2. 数値入力
-3. 試し割りで小因数を除去
-4. 素数判定（ミラーラビン）
-5. 合成数の場合：
-
-   * 20桁以下 → Pollard's Rho
-   * 21桁以上 → ECM法
-6. 結果を表示
-
----
-
-## 使用アルゴリズム
-
-* 試し割り法（Trial Division）
-* ミラー・ラビン素数判定
-* Pollard's Rho 法
-* ECM 法（楕円曲線法）
-
----
-
-## 開発
+### 1. 依存関係インストール
 
 ```bash
 npm install
+```
+
+### 2. 開発サーバ起動
+
+```bash
 npm run dev
 ```
 
-* `src/` を編集
-* ブラウザで動作確認（ホットリロード）
+デフォルト
+
+```text
+http://localhost:5173
+```
 
 ---
 
-## ビルド / 公開
+## ビルド
 
 ```bash
 npm run build
 ```
 
-* `docs/` に出力される
-* GitHub Pages で `docs` を指定すれば公開可能
+ビルド成果物は
+
+```text
+dist/
+```
+
+へ出力されます。
+
+---
+
+## 動作フロー
+
+1. 素数データを読み込み
+2. 入力値を検証
+3. 試し割り法で小因数を除去
+4. ミラーラビン法で素数判定
+5. 合成数の場合は因数分解アルゴリズムを実行
+6. 素因数分解結果を表示
+
+---
+
+## 使用アルゴリズム
+
+### Trial Division
+
+小さな素因数を高速に除去するための試し割り法。
+
+### Miller–Rabin
+
+確率的素数判定アルゴリズム。
+
+### Pollard's Rho
+
+比較的小さな合成数に対して効率的な因数分解アルゴリズム。
+
+### ECM (Elliptic Curve Method)
+
+大きな整数の因数分解を目的とした楕円曲線法。
+
+Web Worker を利用して並列実行されます。
 
 ---
 
@@ -104,8 +117,18 @@ npm run build
 
 ---
 
-## 注意
+## デプロイ
 
-* `primes.txt` は fetch するため **HTTPサーバー経由で実行する必要があります**
-* `docs/` はビルド成果物のため **直接編集しない**
-* 変更は `src/` 側で行う
+Vercel を想定しています。
+
+GitHub リポジトリと連携することで、Push 時に自動ビルド・自動デプロイが実行されます。
+
+---
+
+## 開発メモ
+
+* 素因数分解アルゴリズムは `src/algorithms` に配置する
+* UI コンポーネントは `src/components` に配置する
+* 計算制御ロジックは `src/hooks` に集約する
+* 素数データは `public/data` に配置する
+* Web Worker 関連処理はアルゴリズム実装の近くに配置する
